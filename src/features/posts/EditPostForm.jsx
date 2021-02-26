@@ -2,14 +2,12 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
-import { postUpdated } from "./postSlice";
+import { postUpdated, selectPostByID } from "./postSlice";
 
 export const EditPostForm = ({ match }) => {
   const { postID } = match.params;
 
-  const post = useSelector((state) =>
-    state.posts.find((post) => post.id === postID)
-  );
+  const post = useSelector((state) => selectPostByID(state, postID));
 
   const [title, setTitle] = useState(post.title);
   const [content, setContent] = useState(post.content);
